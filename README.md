@@ -42,7 +42,7 @@ express()
 
 ### `activityLogger(properties)`
 
-- Returns: `Function` ([`event`](#event))
+- Returns: `Function` ([`event`](#eventproperties))
 
 Sets global properties for all GA events.
 
