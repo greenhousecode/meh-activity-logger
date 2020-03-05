@@ -51,7 +51,7 @@ Sets initial properties for all GA events.
 
 | Key   | Description                                                                                                   | Default value                                        |
 | ----- | ------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------- |
-| `v`   | [Protocol Version](https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters#v)     | `1`                                                  |
+| `v`   | [Protocol Version](https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters#v)     | `"1"`                                                |
 | `aid` | [Application ID](https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters#aid)     | _`name` value from your project's `package.json`_    |
 | `av`  | [Application Version](https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters#av) | _`version` value from your project's `package.json`_ |
 
@@ -65,7 +65,7 @@ Overrides initial properties, and fires a custom event to Google Analytics.
 
 | Key   | Description                                                                                                         | Default value                                                                                               |
 | ----- | ------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- |
-| `t`   | [Hit Type](https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters#t)                   | `event`                                                                                                     |
+| `t`   | [Hit Type](https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters#t)                   | `"event"`                                                                                                   |
 | `dp`  | [Document Path](https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters#dp)             | _`req.originalUrl`_                                                                                         |
 | `dr`  | [Document Referrer](https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters#dr)         | _`req.get('referer')`_                                                                                      |
 | `ua`  | [User Agent Override](https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters#ua)       | _`req.get('user-agent')`_                                                                                   |
