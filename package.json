@@ -1,0 +1,46 @@
+{
+  "name": "meh-activity-logger",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/bundle.cjs.js",
+  "module": "dist/bundle.esm.js",
+  "scripts": {
+    "lint": "eslint --ignore-path .gitignore .",
+    "format": "prettier --ignore-path .gitignore --check '**/*.{css,graphql,html,json,md,scss,yml}'",
+    "dev": "rollup -cw",
+    "build": "rollup -c",
+    "prepublishOnly": "yarn lint && yarn build"
+  },
+  "lint-staged": {
+    "*.js": [
+      "yarn lint --fix",
+      "git add"
+    ],
+    "*.{css,graphql,html,json,md,scss,yml}": [
+      "yarn format --write",
+      "git add"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "repository": "github:greenhousecode/meh-activity-logger",
+  "bugs": "https://github.com/greenhousecode/meh-activity-logger/issues",
+  "homepage": "https://github.com/greenhousecode/meh-activity-logger#readme",
+  "author": "Rick Stevens <rick.stevens@greenhousegroup.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "eslint": "6.1.0",
+    "eslint-config-airbnb-base": "14.0.0",
+    "eslint-config-prettier": "^6.10.0",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-prettier": "^3.1.2",
+    "husky": "^4.2.3",
+    "lint-staged": "^10.0.8",
+    "prettier": "^1.19.1",
+    "rollup": "^1.32.0",
+    "rollup-plugin-eslint": "^7.0.0"
+  }
+}
