@@ -84,12 +84,13 @@ Properties with default values:
 
 Helper/alias properties:
 
-| Key        | Type or values | Description                                                                  | Mapped property                                                                                                 | Default value                  |
-| ---------- | -------------- | ---------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- | ------------------------------ |
-| `clientId` | String         | Generates a UUID from the input string.                                      | `cid` ([Client ID](https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters#cid))    | _Generated UUID from `req.ip`_ |
-| `priority` | `1`\|`2`\|`3`  | Maps to `"Primary KPI"`, `"Secondary KPI"` or `"Tertiary KPI"` respectively. | `ec` ([Event Category](https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters#ec)) | `1` (`"Primary KPI"`)          |
-| `action`   | String         | Describes the event taking place.                                            | `ea` ([Event Action](https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters#ea))   |                                |
-| `label`    | String         | Labels the event.                                                            | `el` ([Event Label](https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters#el))    |                                |
-| `value`    | Integer        | Adds a metric to the event.                                                  | `ev` ([Event Value](https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters#ev))    |                                |
+| Key            | Type or values | Description                                                                  | Mapped property                                                                                                 | Default value                  |
+| -------------- | -------------- | ---------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- | ------------------------------ |
+| `logPageViews` | Boolean        | Sends `pageview` hit type events for all page views.                         |                                                                                                                 | `false`                        |
+| `clientId`     | String         | Generates a UUID from the input string.                                      | `cid` ([Client ID](https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters#cid))    | _Generated UUID from `req.ip`_ |
+| `priority`     | `1`\|`2`\|`3`  | Maps to `"Primary KPI"`, `"Secondary KPI"` or `"Tertiary KPI"` respectively. | `ec` ([Event Category](https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters#ec)) | `1` (`"Primary KPI"`)          |
+| `action`       | String         | Describes the event taking place.                                            | `ea` ([Event Action](https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters#ea))   |                                |
+| `label`        | String         | Labels the event.                                                            | `el` ([Event Label](https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters#el))    |                                |
+| `value`        | Integer        | Adds a metric to the event.                                                  | `ev` ([Event Value](https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters#ev))    |                                |
 
 > For all other properties, see [Google Analytics Measurement Protocol](https://developers.google.com/analytics/devguides/collection/protocol/v1/reference).
