@@ -17,7 +17,7 @@ import express from 'express';
 import activityLogger from 'meh-activity-logger';
 
 express()
-  .use(activityLogger({ tid: 'UA-XXXXXX-X' }))
+  .use(activityLogger('UA-XXXXXX-X'))
   .get('/', (req, res) => {
     req.event({ action: 'Some event', priority: 1 });
     res.sendStatus(200);
@@ -31,7 +31,7 @@ Or directly:
 import express from 'express';
 import activityLogger from 'meh-activity-logger';
 
-const event = activityLogger({ tid: 'UA-XXXXXX-X' });
+const event = activityLogger('UA-XXXXXX-X');
 
 express()
   .get('/', event({ action: 'Some event', priority: 1 }), (req, res) => res.sendStatus(200))
@@ -40,11 +40,17 @@ express()
 
 ## API
 
-### `activityLogger(properties)`
+### `activityLogger(tid|properties)`
 
 - Returns: `Function` ([`event`](#eventproperties))
 
 Sets global properties for all GA events.
+
+#### `tid`
+
+- Type: `String`
+
+Tracking ID (format: `"UA-XXXXXX-X"`). Equal to `{ tid: "UA-XXXXXX-X" }`.
 
 #### `properties`
 
