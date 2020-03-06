@@ -70,9 +70,9 @@ Properties with default values:
 
 Helper/alias properties:
 
-| Key            | Type    | Description                                                  | Maps to | Default value |
-| -------------- | ------- | ------------------------------------------------------------ | ------- | ------------- |
-| `logPageViews` | Boolean | Sends `pageview` hit type events for all Express page views. | -       | `false`       |
+| Key            | Type    | Description                                                 | Default value |
+| -------------- | ------- | ----------------------------------------------------------- | ------------- |
+| `logPageViews` | Boolean | Send `pageview` hit type events for all Express page views. | `false`       |
 
 ### `event(properties)`
 
