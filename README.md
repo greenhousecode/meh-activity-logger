@@ -64,9 +64,9 @@ Properties with default values:
 
 Helper/alias properties:
 
-| Key            | Type    | Description                                                  | Mapped property | Default value |
-| -------------- | ------- | ------------------------------------------------------------ | --------------- | ------------- |
-| `logPageViews` | Boolean | Sends `pageview` hit type events for all Express page views. | -               | `false`       |
+| Key            | Type    | Description                                                  | Maps to | Default value |
+| -------------- | ------- | ------------------------------------------------------------ | ------- | ------------- |
+| `logPageViews` | Boolean | Sends `pageview` hit type events for all Express page views. | -       | `false`       |
 
 ### `event(properties)`
 
@@ -92,7 +92,7 @@ Properties with default values:
 
 Helper/alias properties:
 
-| Key        | Type          | Description                                                                  | Mapped property                                                                                                 | Default value                  |
+| Key        | Type          | Description                                                                  | Maps to                                                                                                         | Default value                  |
 | ---------- | ------------- | ---------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- | ------------------------------ |
 | `clientId` | String        | Generates a UUID from the input string.                                      | `cid` ([Client ID](https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters#cid))    | _Generated UUID from `req.ip`_ |
 | `priority` | `1`\|`2`\|`3` | Maps to `"Primary KPI"`, `"Secondary KPI"` or `"Tertiary KPI"` respectively. | `ec` ([Event Category](https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters#ec)) | `1` (`"Primary KPI"`)          |
