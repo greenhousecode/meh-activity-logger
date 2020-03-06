@@ -40,13 +40,13 @@ express()
 
 ## API
 
-### `activityLogger(tid|properties)`
+### `activityLogger(trackingId|properties)`
 
 - Returns: `Function` ([`event`](#eventproperties))
 
 Sets global properties for all GA events.
 
-#### `tid`
+#### `trackingId`
 
 - Type: `String`
 
