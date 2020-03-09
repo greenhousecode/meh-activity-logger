@@ -52,11 +52,11 @@ Sets global properties for all GA events.
 
 Tracking ID (format: `"UA-XXXXXX-X"`). Equal to `{ tid: "UA-XXXXXX-X" }`.
 
-#### `properties`
+#### `properties` <small>([GA Measurement Protocol](https://developers.google.com/analytics/devguides/collection/protocol/v1/reference))</small>
 
 - Type: `Object`
 
-Properties with default values:
+Defaults:
 
 | Key                                                                                                                  | Default value                                        |
 | -------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------- |
@@ -65,14 +65,14 @@ Properties with default values:
 | `av` ([Application Version](https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters#av)) | _`version` value from your project's `package.json`_ |
 | `cd1` ([Custom Dimension](https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters#cd_))  | _`name` value from your project's `package.json`_    |
 | `cd2` ([Custom Dimension](https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters#cd_))  | _`version` value from your project's `package.json`_ |
+| `cid` ([Client ID](https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters#cid))         | _Generated UUID from `req.ip`_                       |
+| `dh` ([Document Host Name](https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters#dh))  | _`req.hostname`_                                     |
+| `dp` ([Document Path](https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters#dp))       | _`req.originalUrl`_                                  |
+| `dr` ([Document Referrer](https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters#dr))   | _`req.get('Referer')`_                               |
+| `ua` ([User Agent Override](https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters#ua)) | _`req.get('User-Agent')`_                            |
+| `uip` ([IP Override](https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters#uip))       | _`req.ip` (anonymized in GA)_                        |
 
-> For all possible properties, see [Google Analytics Measurement Protocol](https://developers.google.com/analytics/devguides/collection/protocol/v1/reference).
-
-Helper/alias properties:
-
-| Key            | Type    | Description                                                 | Default value |
-| -------------- | ------- | ----------------------------------------------------------- | ------------- |
-| `logPageViews` | Boolean | Send `pageview` hit type events for all Express page views. | `false`       |
+> For all other GA properties, see [Google Analytics Measurement Protocol](https://developers.google.com/analytics/devguides/collection/protocol/v1/reference).
 
 ### `event(properties)`
 
@@ -80,28 +80,41 @@ Helper/alias properties:
 
 Overrides global properties, and fires a custom event to Google Analytics.
 
-#### `properties`
+#### `properties` <small>([GA Measurement Protocol](https://developers.google.com/analytics/devguides/collection/protocol/v1/reference))</small>
 
 - Type: `Object`
 
-Properties with default values:
+Defaults:
 
-| Key                                                                                                                  | Default value                 |
-| -------------------------------------------------------------------------------------------------------------------- | ----------------------------- |
-| `t` ([Hit Type](https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters#t))              | `"event"`                     |
-| `dp` ([Document Path](https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters#dp))       | _`req.originalUrl`_           |
-| `dr` ([Document Referrer](https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters#dr))   | _`req.get('Referer')`_        |
-| `ua` ([User Agent Override](https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters#ua)) | _`req.get('User-Agent')`_     |
-| `uip` ([IP Override](https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters#uip))       | _`req.ip` (anonymized in GA)_ |
+| Key                                                                                                             | Default value   |
+| --------------------------------------------------------------------------------------------------------------- | --------------- |
+| `t` ([Hit Type](https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters#t))         | `"event"`       |
+| `ec` ([Event Category](https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters#ec)) | `"Primary KPI"` |
 
-> For all possible properties, see [Google Analytics Measurement Protocol](https://developers.google.com/analytics/devguides/collection/protocol/v1/reference).
+> For all other GA properties, see [Google Analytics Measurement Protocol](https://developers.google.com/analytics/devguides/collection/protocol/v1/reference).
 
-Helper/alias properties:
+Custom properties:
 
-| Key        | Type          | Description                                                                  | Maps to                                                                                                         | Default value                  |
-| ---------- | ------------- | ---------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- | ------------------------------ |
-| `clientId` | String        | Generates a UUID from the input string.                                      | `cid` ([Client ID](https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters#cid))    | _Generated UUID from `req.ip`_ |
-| `priority` | `1`\|`2`\|`3` | Maps to `"Primary KPI"`, `"Secondary KPI"` or `"Tertiary KPI"` respectively. | `ec` ([Event Category](https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters#ec)) | `1` (`"Primary KPI"`)          |
-| `action`   | String        | Describes the event taking place.                                            | `ea` ([Event Action](https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters#ea))   |                                |
-| `label`    | String        | Labels the event.                                                            | `el` ([Event Label](https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters#el))    |                                |
-| `value`    | Integer       | Adds a metric to the event.                                                  | `ev` ([Event Value](https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters#ev))    |                                |
+| Key        | Type          | Description                                                                  | Maps to                                                                                                         |
+| ---------- | ------------- | ---------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- |
+| `clientId` | String        | Generates a UUID from the input string.                                      | `cid` ([Client ID](https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters#cid))    |
+| `priority` | `1`\|`2`\|`3` | Maps to `"Primary KPI"`, `"Secondary KPI"` or `"Tertiary KPI"` respectively. | `ec` ([Event Category](https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters#ec)) |
+| `action`   | String        | Describes the event taking place.                                            | `ea` ([Event Action](https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters#ea))   |
+| `label`    | String        | Labels the event.                                                            | `el` ([Event Label](https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters#el))    |
+| `value`    | Integer       | Adds a metric to the event.                                                  | `ev` ([Event Value](https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters#ev))    |
+
+### `pageview(properties)`
+
+- Returns: `Promise<void>`
+
+Overrides global properties, and fires a pageview event to Google Analytics.
+
+#### `properties` <small>([GA Measurement Protocol](https://developers.google.com/analytics/devguides/collection/protocol/v1/reference))</small>
+
+- Type: `Object`
+
+Defaults:
+
+| Key                                                                                                     | Default value |
+| ------------------------------------------------------------------------------------------------------- | ------------- |
+| `t` ([Hit Type](https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters#t)) | `"pageview"`  |
