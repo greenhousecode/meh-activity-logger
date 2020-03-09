@@ -44,7 +44,7 @@ Both will result in:
 // POST https://www.google-analytics.com/collect
 
 {
-  "v": "1",
+  "v": 1,
   "tid": "UA-XXXXXX-X",
   "cid": "d3486ae9-136e-5856-bc42-212385ea7970",
   "uip": "0.0.0.0",
@@ -84,18 +84,18 @@ Defaults:
 
 | Key                                                                                                                  | Default value                                        |
 | -------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------- |
-| `v` ([Protocol Version](https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters#v))      | `"1"`                                                |
+| `v` ([Protocol Version](https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters#v))      | `1`                                                  |
 | `tid` ([Tracking ID](https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters#td))        | _`process.env.MEH_ACTIVITY_LOGGER_TRACKING_ID`_      |
+| `cid` ([Client ID](https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters#cid))         | _Generated UUID from `req.ip`_                       |
+| `uip` ([IP Override](https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters#uip))       | _`req.ip` (anonymized in GA)_                        |
+| `ua` ([User Agent Override](https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters#ua)) | _`req.get('User-Agent')`_                            |
+| `dr` ([Document Referrer](https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters#dr))   | _`req.get('Referer')`_                               |
+| `dh` ([Document Host Name](https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters#dh))  | _`req.hostname`_                                     |
+| `dp` ([Document Path](https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters#dp))       | _`req.originalUrl`_                                  |
 | `aid` ([Application ID](https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters#aid))    | _`name` value from your project's `package.json`_    |
 | `av` ([Application Version](https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters#av)) | _`version` value from your project's `package.json`_ |
 | `cd1` ([Custom Dimension](https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters#cd_))  | _`name` value from your project's `package.json`_    |
 | `cd2` ([Custom Dimension](https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters#cd_))  | _`version` value from your project's `package.json`_ |
-| `cid` ([Client ID](https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters#cid))         | _Generated UUID from `req.ip`_                       |
-| `dh` ([Document Host Name](https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters#dh))  | _`req.hostname`_                                     |
-| `dp` ([Document Path](https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters#dp))       | _`req.originalUrl`_                                  |
-| `dr` ([Document Referrer](https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters#dr))   | _`req.get('Referer')`_                               |
-| `ua` ([User Agent Override](https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters#ua)) | _`req.get('User-Agent')`_                            |
-| `uip` ([IP Override](https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters#uip))       | _`req.ip` (anonymized in GA)_                        |
 
 > For all other GA properties, see [Google Analytics Measurement Protocol](https://developers.google.com/analytics/devguides/collection/protocol/v1/reference).
 
