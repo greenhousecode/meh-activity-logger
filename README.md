@@ -66,7 +66,7 @@ Both will result in:
 
 ### `activityLogger(trackingId|properties)`
 
-- Returns: `Function` ([`event`](#eventproperties))
+- Returns: `Function` ([`event`](#eventactionproperties))
 
 Sets global properties for all GA events.
 
