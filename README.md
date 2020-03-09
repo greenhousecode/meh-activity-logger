@@ -10,7 +10,7 @@ yarn add meh-activity-logger
 
 ## Usage
 
-Logging events through Express:
+Logging an event:
 
 ```js
 import express from 'express';
@@ -18,14 +18,14 @@ import activityLogger from 'meh-activity-logger';
 
 express()
   .use(activityLogger('UA-XXXXXX-X'))
-  .get('/', (req, res) => {
-    req.event({ action: 'Some event', priority: 1 });
+  .get('/example', (req, res) => {
+    req.event('Example event');
     res.sendStatus(200);
   })
   .listen(3000);
 ```
 
-Or directly:
+Or:
 
 ```js
 import express from 'express';
@@ -34,8 +34,32 @@ import activityLogger from 'meh-activity-logger';
 const event = activityLogger('UA-XXXXXX-X');
 
 express()
-  .get('/', event({ action: 'Some event', priority: 1 }), (req, res) => res.sendStatus(200))
+  .get('/example', event('Example event'), (req, res) => res.sendStatus(200))
   .listen(3000);
+```
+
+Both will result in:
+
+```json
+// POST https://www.google-analytics.com/collect
+
+{
+  "v": "1",
+  "tid": "UA-XXXXXX-X",
+  "cid": "d3486ae9-136e-5856-bc42-212385ea7970",
+  "uip": "0.0.0.0",
+  "ua": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.132 Safari/537.36",
+  "dr": "https://www.example.com/",
+  "t": "event",
+  "dh": "example.com",
+  "dp": "/example",
+  "aid": "example-app",
+  "av": "1.0.0",
+  "ec": "Primary KPI",
+  "ea": "Example event",
+  "cd1": "example-app",
+  "cd2": "1.0.0"
+}
 ```
 
 ## API
@@ -50,7 +74,7 @@ Sets global properties for all GA events.
 
 - Type: `String`
 
-Tracking ID (format: `"UA-XXXXXX-X"`). Equal to `{ tid: "UA-XXXXXX-X" }`.
+[Tracking ID](https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters#tid) (format: `"UA-XXXXXX-X"`). Equal to `{ tid: 'UA-XXXXXX-X' }`.
 
 #### `properties` <small>([GA Measurement Protocol](https://developers.google.com/analytics/devguides/collection/protocol/v1/reference))</small>
 
@@ -74,11 +98,17 @@ Defaults:
 
 > For all other GA properties, see [Google Analytics Measurement Protocol](https://developers.google.com/analytics/devguides/collection/protocol/v1/reference).
 
-### `event(properties)`
+### `event(action|properties)`
 
 - Returns: `Promise<void>`
 
 Overrides global properties, and fires a custom event to Google Analytics.
+
+#### `action`
+
+- Type: `String`
+
+[Event Action](https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters#ea). Equal to `{ action: 'Example' }` or `{ ea: 'Example' }`.
 
 #### `properties` <small>([GA Measurement Protocol](https://developers.google.com/analytics/devguides/collection/protocol/v1/reference))</small>
 
