@@ -101,7 +101,7 @@ Defaults:
 
 ### `event(action|properties)`
 
-- Returns: `Promise<void>`
+- Returns: `Promise`<[Response](https://www.npmjs.com/package/node-fetch#class-response)>
 
 Overrides global properties, and fires a custom event to Google Analytics.
 
@@ -136,7 +136,7 @@ Custom properties:
 
 ### `pageview(properties)`
 
-- Returns: `Promise<void>`
+- Returns: `Promise`<[Response](https://www.npmjs.com/package/node-fetch#class-response)>
 
 Overrides global properties, and fires a pageview event to Google Analytics.
 

@@ -47,6 +47,8 @@
     "rollup-plugin-eslint": "^7.0.0"
   },
   "dependencies": {
+    "node-fetch": "^2.6.0",
+    "parent-package-json": "^2.0.1",
     "uuid-by-string": "^3.0.2"
   }
 }
