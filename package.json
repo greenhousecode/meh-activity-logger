@@ -4,20 +4,23 @@
   "description": "Express middleware to log custom events to Google Analytics.",
   "main": "dist/bundle.cjs.js",
   "module": "dist/bundle.esm.js",
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "lint": "eslint --ignore-path .gitignore .",
     "format": "prettier --ignore-path .gitignore --check '**/*.{css,graphql,html,json,md,scss,yml}'",
     "dev": "rollup -cw",
     "build": "rollup -c",
-    "prepublishOnly": "yarn lint && yarn build"
+    "prepublishOnly": "npm run lint && npm run build"
   },
   "lint-staged": {
     "*.js": [
-      "yarn lint --fix",
+      "npm run lint -- --fix",
       "git add"
     ],
     "*.{css,graphql,html,json,md,scss,yml}": [
-      "yarn format --write",
+      "npm run format -- --write",
       "git add"
     ]
   },
@@ -42,5 +45,8 @@
     "prettier": "^1.19.1",
     "rollup": "^1.32.0",
     "rollup-plugin-eslint": "^7.0.0"
+  },
+  "dependencies": {
+    "uuid-by-string": "^3.0.2"
   }
 }
