@@ -65,13 +65,14 @@ export default trackingIdOrProperties => {
       : trackingIdOrProperties;
 
   return (req, res, next) => {
+    const defaults = { ...getDefaultProperties(req), ...globalProperties };
+
     req.event = actionOrProperties => {
       const properties =
         typeof actionOrProperties === 'string' ? { ea: actionOrProperties } : actionOrProperties;
 
       return sendData({
-        ...getDefaultProperties(req),
-        ...globalProperties,
+        ...defaults,
         ...{ t: 'event', ec: categoryMapping[1] },
         ...parseCustomProperties(properties),
       });
@@ -79,8 +80,7 @@ export default trackingIdOrProperties => {
 
     req.pageview = properties =>
       sendData({
-        ...getDefaultProperties(req),
-        ...globalProperties,
+        ...defaults,
         ...{ t: 'pageview' },
         ...parseCustomProperties(properties),
       });
