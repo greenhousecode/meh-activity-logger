@@ -67,31 +67,33 @@ const sendData = properties => {
   return fetch('https://www.google-analytics.com/collect', { method: 'POST', body: params });
 };
 
-export default trackingIdOrProperties => {
+export default (trackingIdOrProperties = {}) => {
   const globalProperties =
     typeof trackingIdOrProperties === 'string'
       ? { tid: trackingIdOrProperties }
-      : trackingIdOrProperties;
+      : parseCustomProperties(trackingIdOrProperties);
 
   return (req, res, next) => {
     const defaults = { ...getDefaultProperties(req), ...globalProperties };
 
     req.event = actionOrProperties => {
       const properties =
-        typeof actionOrProperties === 'string' ? { ea: actionOrProperties } : actionOrProperties;
+        typeof actionOrProperties === 'string'
+          ? { ea: actionOrProperties }
+          : parseCustomProperties(actionOrProperties);
 
       return sendData({
         ...defaults,
         ...{ t: 'event', ec: categoryMapping[1] },
-        ...parseCustomProperties(properties),
+        ...properties,
       });
     };
 
-    req.pageview = properties =>
+    req.pageview = (properties = {}) =>
       sendData({
         ...defaults,
         ...{ t: 'pageview' },
-        ...parseCustomProperties(properties),
+        ...properties,
       });
 
     next();

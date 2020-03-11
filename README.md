@@ -19,26 +19,13 @@ import activityLogger from 'meh-activity-logger';
 express()
   .use(activityLogger('UA-XXXXXX-X'))
   .get('/example', (req, res) => {
-    req.event('Example event');
+    req.event('Example event'); // Or use req.pageview() to track a pageview
     res.sendStatus(200);
   })
   .listen(3000);
 ```
 
-Or:
-
-```js
-import express from 'express';
-import activityLogger from 'meh-activity-logger';
-
-const event = activityLogger('UA-XXXXXX-X');
-
-express()
-  .get('/example', event('Example event'), (req, res) => res.sendStatus(200))
-  .listen(3000);
-```
-
-Both will result in:
+Will result in:
 
 ```json
 // POST https://www.google-analytics.com/collect
@@ -65,7 +52,7 @@ Both will result in:
 
 ## API
 
-### `activityLogger(trackingId|properties)`
+### `activityLogger([trackingId|properties])`
 
 - Returns: `Function` ([`event`](#eventactionproperties))
 
@@ -136,7 +123,7 @@ Custom properties:
 | `label`    | String        | Labels the event.                                                            | `el` ([Event Label](https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters#el))    |
 | `value`    | Integer       | Adds a metric to the event.                                                  | `ev` ([Event Value](https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters#ev))    |
 
-### `pageview(properties)`
+### `pageview([properties])`
 
 - Returns: `Promise`<[Response](https://www.npmjs.com/package/node-fetch#class-response)>
 
