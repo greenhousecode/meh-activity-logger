@@ -1500,11 +1500,6 @@ parent-module@^1.0.0:
   dependencies:
     callsites "^3.0.0"
 
-parent-package-json@^2.0.1:
-  version "2.0.1"
-  resolved "https://registry.yarnpkg.com/parent-package-json/-/parent-package-json-2.0.1.tgz#49b554a9e2dccaed45d7e1a25ea8cec9d7bb6b12"
-  integrity sha512-dyHr5bP6k8vNT6oP0i4qsfD/rtUiSruJdv+I/BPr7rRtzYRnCu0v1qcM5yHmubobtvGX38SGe1XF2LBo1fN/xg==
-
 parse-json@^2.2.0:
   version "2.2.0"
   resolved "https://registry.npmjs.org/parse-json/-/parse-json-2.2.0.tgz#f480f40434ef80741f8469099f8dea18f55a4dc9"

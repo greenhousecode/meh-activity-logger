@@ -1,9 +1,13 @@
 import stringToUuid from 'uuid-by-string';
-import parent from 'parent-package-json';
 import { URLSearchParams } from 'url';
 import fetch from 'node-fetch';
+import { readFileSync } from 'fs';
+import { join } from 'path';
 
-const { name: parentPackageName, version: parentPackageVersion } = parent().parse();
+const { name: parentPackageName, version: parentPackageVersion } = JSON.parse(
+  readFileSync(join(process.cwd(), 'package.json')),
+);
+
 const categoryMapping = { 1: 'Primary KPI', 2: 'Secondary KPI', 3: 'Tertiary KPI' };
 
 const getDefaultProperties = req => ({
@@ -15,6 +19,7 @@ const getDefaultProperties = req => ({
   dr: req.get('Referer'),
   dh: req.hostname,
   dp: req.originalUrl,
+  an: parentPackageName,
   aid: parentPackageName,
   av: parentPackageVersion,
   cd1: parentPackageName,
@@ -54,7 +59,11 @@ const parseCustomProperties = properties => {
 
 const sendData = properties => {
   const params = new URLSearchParams();
-  Object.keys(properties).forEach(key => params.append(key, properties[key]));
+
+  Object.keys(properties).forEach(
+    key => properties[key] != null && params.append(key, properties[key]),
+  );
+
   return fetch('https://www.google-analytics.com/collect', { method: 'POST', body: params });
 };
 

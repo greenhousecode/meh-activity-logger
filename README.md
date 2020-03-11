@@ -53,6 +53,7 @@ Both will result in:
   "t": "event",
   "dh": "example.com",
   "dp": "/example",
+  "an": "example-app",
   "aid": "example-app",
   "av": "1.0.0",
   "ec": "Primary KPI",
@@ -92,6 +93,7 @@ Defaults:
 | `dr` ([Document Referrer](https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters#dr))   | _`req.get('Referer')`_                               |
 | `dh` ([Document Host Name](https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters#dh))  | _`req.hostname`_                                     |
 | `dp` ([Document Path](https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters#dp))       | _`req.originalUrl`_                                  |
+| `an` ([Application Name](https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters#an))    | _`name` value from your project's `package.json`_    |
 | `aid` ([Application ID](https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters#aid))    | _`name` value from your project's `package.json`_    |
 | `av` ([Application Version](https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters#av)) | _`version` value from your project's `package.json`_ |
 | `cd1` ([Custom Dimension](https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters#cd_))  | _`name` value from your project's `package.json`_    |

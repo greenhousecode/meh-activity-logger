@@ -1,6 +1,6 @@
 {
   "name": "meh-activity-logger",
-  "version": "1.0.0",
+  "version": "1.0.0-alpha.2",
   "description": "Express middleware to log custom events to Google Analytics.",
   "main": "dist/bundle.cjs.js",
   "module": "dist/bundle.esm.js",
@@ -50,7 +50,6 @@
   },
   "dependencies": {
     "node-fetch": "^2.6.0",
-    "parent-package-json": "^2.0.1",
     "uuid-by-string": "^3.0.2"
   }
 }
