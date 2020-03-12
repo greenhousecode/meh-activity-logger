@@ -17,7 +17,7 @@ import express from 'express';
 import activityLogger from 'meh-activity-logger';
 
 express()
-  .use(activityLogger('UA-XXXXXX-X'))
+  .use(activityLogger('UA-XXXXXX-X')) // Or use process.env.MEH_ACTIVITY_LOGGER_TRACKING_ID to provide a Tracking ID
   .get('/example', (req, res) => {
     req.event('Example event'); // Or use req.pageview() to track a pageview
     res.sendStatus(200);

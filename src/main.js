@@ -1,7 +1,7 @@
 import stringToUuid from 'uuid-by-string';
 import { URLSearchParams } from 'url';
-import fetch from 'node-fetch';
 import { readFileSync } from 'fs';
+import fetch from 'node-fetch';
 import { join } from 'path';
 
 const { name: parentPackageName, version: parentPackageVersion } = JSON.parse(
@@ -74,7 +74,7 @@ export default (trackingIdOrProperties = {}) => {
       : parseCustomProperties(trackingIdOrProperties);
 
   return (req, res, next) => {
-    const defaults = { ...getDefaultProperties(req), ...globalProperties };
+    const defaultProperties = { ...getDefaultProperties(req), ...globalProperties };
 
     req.event = actionOrProperties => {
       const properties =
@@ -83,7 +83,7 @@ export default (trackingIdOrProperties = {}) => {
           : parseCustomProperties(actionOrProperties);
 
       return sendData({
-        ...defaults,
+        ...defaultProperties,
         ...{ t: 'event', ec: categoryMapping[1] },
         ...properties,
       });
@@ -91,7 +91,7 @@ export default (trackingIdOrProperties = {}) => {
 
     req.pageview = (properties = {}) =>
       sendData({
-        ...defaults,
+        ...defaultProperties,
         ...{ t: 'pageview' },
         ...properties,
       });
