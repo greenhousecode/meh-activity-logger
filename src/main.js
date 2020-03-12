@@ -12,7 +12,7 @@ const categoryMapping = { 1: 'Primary KPI', 2: 'Secondary KPI', 3: 'Tertiary KPI
 
 const getDefaultProperties = req => ({
   v: 1,
-  tid: process.env.MEH_ACTIVITY_LOGGER_TRACKING_ID,
+  tid: process.env.MEH_ACTIVITY_LOGGER_TRACKING_ID || 'UA-26548270-15',
   cid: stringToUuid(req.ip),
   uip: req.ip,
   ua: req.get('User-Agent'),

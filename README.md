@@ -56,7 +56,7 @@ Will result in:
 
 - Returns: `Function` ([`event`](#eventactionproperties))
 
-Sets global properties for all GA events.
+Optionally sets global properties for all GA events.
 
 #### `trackingId`
 
@@ -70,21 +70,21 @@ Sets global properties for all GA events.
 
 Defaults:
 
-| Key                                                                                                                  | Default value                                        |
-| -------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------- |
-| `v` ([Protocol Version](https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters#v))      | `1`                                                  |
-| `tid` ([Tracking ID](https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters#td))        | _`process.env.MEH_ACTIVITY_LOGGER_TRACKING_ID`_      |
-| `cid` ([Client ID](https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters#cid))         | _Generated UUID from `req.ip`_                       |
-| `uip` ([IP Override](https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters#uip))       | _`req.ip` (anonymized in GA)_                        |
-| `ua` ([User Agent Override](https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters#ua)) | _`req.get('User-Agent')`_                            |
-| `dr` ([Document Referrer](https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters#dr))   | _`req.get('Referer')`_                               |
-| `dh` ([Document Host Name](https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters#dh))  | _`req.hostname`_                                     |
-| `dp` ([Document Path](https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters#dp))       | _`req.originalUrl`_                                  |
-| `an` ([Application Name](https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters#an))    | _`name` value from your project's `package.json`_    |
-| `aid` ([Application ID](https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters#aid))    | _`name` value from your project's `package.json`_    |
-| `av` ([Application Version](https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters#av)) | _`version` value from your project's `package.json`_ |
-| `cd1` ([Custom Dimension](https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters#cd_))  | _`name` value from your project's `package.json`_    |
-| `cd2` ([Custom Dimension](https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters#cd_))  | _`version` value from your project's `package.json`_ |
+| Key                                                                                                                  | Default value                                                                                  |
+| -------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
+| `v` ([Protocol Version](https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters#v))      | `1`                                                                                            |
+| `tid` ([Tracking ID](https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters#td))        | _`process.env.MEH_ACTIVITY_LOGGER_TRACKING_ID || 'UA-26548270-15'` (defaults to MEH property)_ |
+| `cid` ([Client ID](https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters#cid))         | _Generated UUID from `req.ip`_                                                                 |
+| `uip` ([IP Override](https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters#uip))       | _`req.ip` (anonymized in GA)_                                                                  |
+| `ua` ([User Agent Override](https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters#ua)) | _`req.get('User-Agent')`_                                                                      |
+| `dr` ([Document Referrer](https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters#dr))   | _`req.get('Referer')`_                                                                         |
+| `dh` ([Document Host Name](https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters#dh))  | _`req.hostname`_                                                                               |
+| `dp` ([Document Path](https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters#dp))       | _`req.originalUrl`_                                                                            |
+| `an` ([Application Name](https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters#an))    | _`name` value from your project's `package.json`_                                              |
+| `aid` ([Application ID](https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters#aid))    | _`name` value from your project's `package.json`_                                              |
+| `av` ([Application Version](https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters#av)) | _`version` value from your project's `package.json`_                                           |
+| `cd1` ([Custom Dimension](https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters#cd_))  | _`name` value from your project's `package.json`_                                              |
+| `cd2` ([Custom Dimension](https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters#cd_))  | _`version` value from your project's `package.json`_                                           |
 
 > For all other GA properties, see [Google Analytics Measurement Protocol](https://developers.google.com/analytics/devguides/collection/protocol/v1/reference).
 
@@ -127,7 +127,7 @@ Custom properties:
 
 - Returns: `Promise`<[Response](https://www.npmjs.com/package/node-fetch#class-response)>
 
-Overrides global properties, and fires a pageview event to Google Analytics.
+Optionally overrides global properties, and fires a pageview event to Google Analytics.
 
 #### `properties` <small>([GA Measurement Protocol](https://developers.google.com/analytics/devguides/collection/protocol/v1/reference))</small>
 
