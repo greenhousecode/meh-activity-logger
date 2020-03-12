@@ -1,23 +1,26 @@
 {
   "name": "meh-activity-logger",
-  "version": "1.0.0",
-  "description": "",
+  "version": "1.0.0-alpha.2",
+  "description": "Express middleware to log custom events to Google Analytics.",
   "main": "dist/bundle.cjs.js",
   "module": "dist/bundle.esm.js",
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "lint": "eslint --ignore-path .gitignore .",
     "format": "prettier --ignore-path .gitignore --check '**/*.{css,graphql,html,json,md,scss,yml}'",
     "dev": "rollup -cw",
     "build": "rollup -c",
-    "prepublishOnly": "yarn lint && yarn build"
+    "prepublishOnly": "npm run lint && npm run build"
   },
   "lint-staged": {
     "*.js": [
-      "yarn lint --fix",
+      "npm run lint -- --fix",
       "git add"
     ],
     "*.{css,graphql,html,json,md,scss,yml}": [
-      "yarn format --write",
+      "npm run format -- --write",
       "git add"
     ]
   },
@@ -32,6 +35,7 @@
   "author": "Rick Stevens <rick.stevens@greenhousegroup.com>",
   "license": "MIT",
   "devDependencies": {
+    "builtin-modules": "^3.1.0",
     "eslint": "6.1.0",
     "eslint-config-airbnb-base": "14.0.0",
     "eslint-config-prettier": "^6.10.0",
@@ -41,6 +45,11 @@
     "lint-staged": "^10.0.8",
     "prettier": "^1.19.1",
     "rollup": "^1.32.0",
-    "rollup-plugin-eslint": "^7.0.0"
+    "rollup-plugin-eslint": "^7.0.0",
+    "rollup-plugin-node-externals": "^2.1.3"
+  },
+  "dependencies": {
+    "node-fetch": "^2.6.0",
+    "uuid-by-string": "^3.0.2"
   }
 }
