@@ -9,6 +9,7 @@ const { name: parentPackageName, version: parentPackageVersion } = JSON.parse(
 );
 
 const categoryMapping = { 1: 'Primary KPI', 2: 'Secondary KPI', 3: 'Tertiary KPI' };
+const isDev = hostname => /^localhost$|^127\.0\.0\.1$|-test\./i.test(hostname);
 
 const getDefaultProperties = req => ({
   v: 1,
@@ -58,6 +59,7 @@ const parseCustomProperties = properties => {
 };
 
 const sendData = properties => {
+  if (isDev(properties.dh)) return Promise.resolve();
   const params = new URLSearchParams();
 
   Object.keys(properties).forEach(
@@ -93,7 +95,7 @@ export default (trackingIdOrProperties = {}) => {
       sendData({
         ...defaultProperties,
         ...{ t: 'pageview' },
-        ...properties,
+        ...parseCustomProperties(properties),
       });
 
     next();
