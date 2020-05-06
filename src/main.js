@@ -13,7 +13,7 @@ const isDev = hostname => /^localhost$|^127\.0\.0\.1$|-test\./i.test(hostname);
 
 const getDefaultProperties = req => ({
   v: 1,
-  tid: process.env.MEH_ACTIVITY_LOGGER_TRACKING_ID || 'UA-26548270-15',
+  tid: 'UA-26548270-15',
   cid: stringToUuid(req.ip),
   uip: req.ip,
   ua: req.get('User-Agent'),
