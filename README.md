@@ -13,19 +13,38 @@ yarn add meh-activity-logger
 Logging an event:
 
 ```js
+// With Express
 import express from 'express';
 import activityLogger from 'meh-activity-logger';
 
 express()
   .use(activityLogger('UA-XXXXXX-X'))
   .get('/example', (req, res) => {
-    req.event('Example event'); // Or use req.pageview() to track a pageview
+    req.event('Example event');
     res.sendStatus(200);
   })
   .listen(3000);
 ```
 
-Will result in:
+```js
+// Without Express
+import activityLogger from 'meh-activity-logger';
+
+const logger = activityLogger('UA-XXXXXX-X');
+
+logger.event({
+  action: 'Example event',
+  clientId: '0.0.0.0',
+  uip: '0.0.0.0',
+  ua:
+    'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.132 Safari/537.36',
+  dr: 'https://www.example.com/',
+  dh: 'example.com',
+  dp: '/example',
+});
+```
+
+Will both result in:
 
 ```json
 // POST https://www.google-analytics.com/collect

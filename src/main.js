@@ -14,10 +14,10 @@ const isDev = hostname => /^localhost$|^127\.0\.0\.1$|-test\./i.test(hostname);
 const getDefaultProperties = req => ({
   v: 1,
   tid: 'UA-26548270-15',
-  cid: stringToUuid(req.ip),
+  cid: req.ip ? stringToUuid(req.ip) : null,
   uip: req.ip,
-  ua: req.get('User-Agent'),
-  dr: req.get('Referer'),
+  ua: req.get ? req.get('User-Agent') : null,
+  dr: req.get ? req.get('Referer') : null,
   dh: req.hostname,
   dp: req.originalUrl,
   an: parentPackageName,
@@ -75,7 +75,7 @@ export default (trackingIdOrProperties = {}) => {
       ? { tid: trackingIdOrProperties }
       : parseCustomProperties(trackingIdOrProperties);
 
-  return (req, res, next) => {
+  return (req = {}, res, next) => {
     const defaultProperties = { ...getDefaultProperties(req), ...globalProperties };
 
     req.event = actionOrProperties => {
@@ -98,6 +98,6 @@ export default (trackingIdOrProperties = {}) => {
         ...parseCustomProperties(properties),
       });
 
-    next();
+    return next ? next() : req;
   };
 };
