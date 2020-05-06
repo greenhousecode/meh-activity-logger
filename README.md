@@ -30,9 +30,9 @@ express()
 // Without Express
 import activityLogger from 'meh-activity-logger';
 
-const logger = activityLogger('UA-XXXXXX-X');
+const { event } = activityLogger('UA-XXXXXX-X');
 
-logger.event({
+event({
   action: 'Example event',
   clientId: '0.0.0.0',
   uip: '0.0.0.0',
