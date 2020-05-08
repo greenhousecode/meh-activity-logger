@@ -14,8 +14,8 @@ Logging an event:
 
 ```js
 // Node with Express
-import express from 'express';
 import activityLogger from 'meh-activity-logger';
+import express from 'express';
 
 express()
   .use(activityLogger('UA-XXXXXX-X'))
@@ -45,16 +45,13 @@ event({
 ```
 
 ```html
-<!-- JavaScript -->
+<!-- Browser with JavaScript -->
 <script src="https://unpkg.com/meh-activity-logger"></script>
 <script>
   var logger = window.mehActivityLogger({
     tid: 'UA-XXXXXX-X',
-    an: 'my-package-name',
-    aid: 'my-package-name',
-    av: 'my-package-version',
-    cd1: 'my-package-name',
-    cd2: 'my-package-version',
+    appName: 'my-package-name',
+    appVersion: 'my-package-version',
   });
 
   logger.event({

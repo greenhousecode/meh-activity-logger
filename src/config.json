@@ -1,0 +1,9 @@
+{
+  "GOOGLE_ANALYTICS_ENDPOINT": "https://www.google-analytics.com/collect",
+  "IS_DEV_REGEXP": ["^localhost$|^127\\.0\\.0\\.1$|-(test|acc)\\.", "i"],
+  "CATEGORY_MAPPING": {
+    "1": "Primary KPI",
+    "2": "Secondary KPI",
+    "3": "Tertiary KPI"
+  }
+}
