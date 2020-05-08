@@ -13,7 +13,7 @@ yarn add meh-activity-logger
 Logging an event:
 
 ```js
-// With Express
+// Node with Express
 import express from 'express';
 import activityLogger from 'meh-activity-logger';
 
@@ -27,7 +27,7 @@ express()
 ```
 
 ```js
-// Without Express
+// Node without Express
 import activityLogger from 'meh-activity-logger';
 
 const { event } = activityLogger('UA-XXXXXX-X');
@@ -44,7 +44,27 @@ event({
 });
 ```
 
-Will both result in:
+```html
+<!-- JavaScript -->
+<script src="https://unpkg.com/meh-activity-logger"></script>
+<script>
+  var logger = window.mehActivityLogger({
+    tid: 'UA-XXXXXX-X',
+    an: 'my-package-name',
+    aid: 'my-package-name',
+    av: 'my-package-version',
+    cd1: 'my-package-name',
+    cd2: 'my-package-version',
+  });
+
+  logger.event({
+    action: 'Example event',
+    clientId: '0.0.0.0',
+  });
+</script>
+```
+
+Will all result in:
 
 ```json
 // POST https://www.google-analytics.com/collect
@@ -75,7 +95,7 @@ Will both result in:
 
 - Returns: `Function` ([`event`](#eventactionproperties))
 
-Optionally sets global properties for all GA events.
+Sets global properties for all GA events.
 
 #### `trackingId`
 
@@ -93,12 +113,11 @@ Defaults:
 | -------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
 | `v` ([Protocol Version](https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters#v))      | `1`                                                                                            |
 | `tid` ([Tracking ID](https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters#td))        | _`process.env.MEH_ACTIVITY_LOGGER_TRACKING_ID || 'UA-26548270-15'` (defaults to MEH property)_ |
-| `cid` ([Client ID](https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters#cid))         | _Generated UUID from `req.ip`_                                                                 |
 | `uip` ([IP Override](https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters#uip))       | _`req.ip` (anonymized in GA)_                                                                  |
-| `ua` ([User Agent Override](https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters#ua)) | _`req.get('User-Agent')`_                                                                      |
-| `dr` ([Document Referrer](https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters#dr))   | _`req.get('Referer')`_                                                                         |
-| `dh` ([Document Host Name](https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters#dh))  | _`req.hostname`_                                                                               |
-| `dp` ([Document Path](https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters#dp))       | _`req.originalUrl`_                                                                            |
+| `ua` ([User Agent Override](https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters#ua)) | _`req.get('User-Agent')` or `navigator.userAgent`_                                             |
+| `dr` ([Document Referrer](https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters#dr))   | _`req.get('Referer')` or `document.referrer`_                                                  |
+| `dh` ([Document Host Name](https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters#dh))  | _`req.hostname` or `location.hostname`_                                                        |
+| `dp` ([Document Path](https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters#dp))       | _`req.originalUrl` or `location.pathname`_                                                     |
 | `an` ([Application Name](https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters#an))    | _`name` value from your project's `package.json`_                                              |
 | `aid` ([Application ID](https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters#aid))    | _`name` value from your project's `package.json`_                                              |
 | `av` ([Application Version](https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters#av)) | _`version` value from your project's `package.json`_                                           |
@@ -109,7 +128,7 @@ Defaults:
 
 ### `event(action|properties)`
 
-- Returns: `Promise`<[Response](https://www.npmjs.com/package/node-fetch#class-response)>
+- Returns: `Promise`<[Response](https://www.npmjs.com/package/isomorphic-fetch)>
 
 Overrides global properties, and fires a custom event to Google Analytics.
 
@@ -134,13 +153,15 @@ Defaults:
 
 Custom properties:
 
-| Key        | Type          | Description                                                                  | Maps to                                                                                                         |
-| ---------- | ------------- | ---------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- |
-| `clientId` | String        | Generates a UUID from the input string.                                      | `cid` ([Client ID](https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters#cid))    |
-| `priority` | `1`\|`2`\|`3` | Maps to `"Primary KPI"`, `"Secondary KPI"` or `"Tertiary KPI"` respectively. | `ec` ([Event Category](https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters#ec)) |
-| `action`   | String        | Describes the event taking place.                                            | `ea` ([Event Action](https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters#ea))   |
-| `label`    | String        | Labels the event.                                                            | `el` ([Event Label](https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters#el))    |
-| `value`    | Integer       | Adds a metric to the event.                                                  | `ev` ([Event Value](https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters#ev))    |
+| Key          | Type          | Description                                                                  | Maps to                                                                                                                                                                                                                                                                                                                                                   |
+| ------------ | ------------- | ---------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `userId`     | String        | A unique representation of the user/session.                                 | `uid` ([User ID](https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters#uid))                                                                                                                                                                                                                                                |
+| `priority`   | `1`\|`2`\|`3` | Maps to `"Primary KPI"`, `"Secondary KPI"` or `"Tertiary KPI"` respectively. | `ec` ([Event Category](https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters#ec))                                                                                                                                                                                                                                           |
+| `action`     | String        | Describes the event taking place.                                            | `ea` ([Event Action](https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters#ea))                                                                                                                                                                                                                                             |
+| `label`      | String        | Labels the event.                                                            | `el` ([Event Label](https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters#el))                                                                                                                                                                                                                                              |
+| `value`      | Integer       | Adds a metric to the label.                                                  | `ev` ([Event Value](https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters#ev))                                                                                                                                                                                                                                              |
+| `appName`    | String        | Identifies the app name.                                                     | `an` ([Application Name](https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters#an)), `aid` ([Application ID](https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters#aid)), `cd1` ([Custom Dimension](https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters#cd_)) |
+| `appVersion` | String        | Identifies the app version.                                                  | `av` ([Application Version](https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters#av)), `cd2` ([Custom Dimension](https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters#cd_))                                                                                                                 |
 
 ### `pageview([properties])`
 

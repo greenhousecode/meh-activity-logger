@@ -1,26 +1,39 @@
-import externals from 'rollup-plugin-node-externals';
+import resolve from '@rollup/plugin-node-resolve';
+import commonjs from '@rollup/plugin-commonjs';
 import { eslint } from 'rollup-plugin-eslint';
+import babel from '@rollup/plugin-babel';
+import json from '@rollup/plugin-json';
 
-import { main, module } from './package.json';
+import { name as pkgName, main, browser /* , module, dependencies */ } from './package.json';
 
-const defaults = {
-  input: 'src/main.js',
-  plugins: [eslint(), externals({ deps: true })],
-};
+const name = pkgName.replace(/-([^-])/g, ([, match]) => match.toUpperCase());
 
 export default [
   {
-    ...defaults,
+    input: 'src/main.js',
+    plugins: [eslint(), json(), resolve(), commonjs(), babel()],
     output: {
+      name,
       file: main,
       format: 'cjs',
     },
   },
   {
-    ...defaults,
+    input: 'src/main.js',
+    plugins: [eslint(), json(), resolve(), commonjs(), babel()],
     output: {
-      file: module,
-      format: 'esm',
+      name,
+      file: browser,
+      format: 'iife',
     },
   },
+  // {
+  //   input: 'src/main.js',
+  //   plugins: [eslint()],
+  //   external: Object.keys(dependencies),
+  //   output: {
+  //     file: module,
+  //     format: 'esm',
+  //   },
+  // },
 ];
