@@ -4,6 +4,6 @@ export default {
   plugins: { 'node-builtins': true },
   output: {
     moduleName: name.replace(/-([^-])/g, ([, match]) => match.toUpperCase()),
-    format: ['cjs', 'esm', 'umd'],
+    format: ['cjs', 'esm', 'umd-min'],
   },
 };
