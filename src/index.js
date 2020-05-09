@@ -1,39 +1,21 @@
-import parseHelperProperties from './actions/parseHelperProperties';
-import getDefaultProperties from './actions/getDefaultProperties';
-import sendGaMeasurement from './actions/sendGaMeasurement';
-import { EVENT_CATEGORY_MAPPING } from './config.json';
+import getMeasurement from './actions/getMeasurement';
+import getProperties from './utils/getProperties';
 
-const getEvent = (globalProperties, req) => (properties = {}) =>
-  sendGaMeasurement(
-    parseHelperProperties({
-      ...getDefaultProperties(req),
-      ec: EVENT_CATEGORY_MAPPING[1],
-      ...globalProperties,
-      ...properties,
-      t: 'event',
-    }),
-  );
+export default (measurementIdOrProperties = {}) => {
+  const properties = getProperties('tid', measurementIdOrProperties);
 
-const getPageView = (globalProperties, req) => (properties = {}) =>
-  sendGaMeasurement(
-    parseHelperProperties({
-      ...getDefaultProperties(req),
-      ...globalProperties,
-      ...properties,
-      t: 'pageView',
-    }),
-  );
+  return {
+    event: getMeasurement('event', properties),
+    pageView: getMeasurement('pageView', properties),
+  };
+};
 
-export default (globalProperties = {}) => ({
-  event: getEvent(globalProperties),
-  pageView: getPageView(globalProperties),
-});
+export const expressMiddleware = (measurementIdOrProperties = {}) => {
+  const properties = getProperties('tid', measurementIdOrProperties);
 
-// TODO:
-export const expressMiddleware = (globalProperties = {}) => {
   return (req, res, next) => {
-    req.event = getEvent(globalProperties, req);
-    req.pageView = getPageView(globalProperties, req);
+    req.event = getMeasurement('event', properties, req);
+    req.pageView = getMeasurement('pageView', properties, req);
     next();
   };
 };
