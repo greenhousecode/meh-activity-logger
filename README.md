@@ -1,6 +1,6 @@
 # MEH Activity Logger
 
-> Log custom events to Google Analytics.
+> Log custom events and pageviews to Google Analytics through Node, Express middleware or the browser.
 
 ## Install
 
@@ -10,15 +10,15 @@ yarn add meh-activity-logger
 
 ## Usage
 
-Logging an event:
+Identical event logging examples:
 
 ```js
 // Node with Express
-import expressMiddleware as activityLogger from 'meh-activity-logger';
+import expressMiddleware as mehActivityLogger from 'meh-activity-logger';
 import express from 'express';
 
 express()
-  .use(activityLogger('UA-XXXXXX-X'))
+  .use(mehActivityLogger('UA-XXXXXX-X'))
   .get('/example', (req, res) => {
     req.event('Example event');
     res.sendStatus(200);
@@ -28,12 +28,13 @@ express()
 
 ```js
 // Node without Express
-import activityLogger from 'meh-activity-logger';
+import mehActivityLogger from 'meh-activity-logger';
 
-const { event } = activityLogger('UA-XXXXXX-X');
+const { event } = mehActivityLogger('UA-XXXXXX-X');
 
 event({
   action: 'Example event',
+  userId: '0.0.0.0',
   uip: '0.0.0.0',
   ua:
     'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.132 Safari/537.36',
@@ -49,13 +50,14 @@ event({
 <script>
   var logger = window.mehActivityLogger.default({
     tid: 'UA-XXXXXX-X',
-    appName: 'my-package-name',
-    appVersion: 'my-package-version',
+    appName: 'example-app',
+    appVersion: '1.0.0',
   });
 
   logger.event({
     action: 'Example event',
     userId: '0.0.0.0',
+    uip: '0.0.0.0',
   });
 </script>
 ```
