@@ -1,4 +1,4 @@
-import { CATEGORY_MAPPING } from '../config.json';
+import { EVENT_CATEGORY_MAPPING } from '../config.json';
 import generateHash from '../utils/generateHash';
 
 export default (properties) => {
@@ -10,7 +10,7 @@ export default (properties) => {
   }
 
   if (properties.priority) {
-    parsedProperties.ec = CATEGORY_MAPPING[properties.priority];
+    parsedProperties.ec = EVENT_CATEGORY_MAPPING[properties.priority];
     delete parsedProperties.priority;
   }
 

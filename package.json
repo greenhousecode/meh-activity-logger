@@ -2,18 +2,19 @@
   "name": "meh-activity-logger",
   "version": "2.0.0",
   "description": "Express middleware to log custom events to Google Analytics.",
-  "main": "dist/bundle.cjs.js",
-  "browser": "dist/bundle.iife.js",
-  "module": "dist/bundle.esm.js",
+  "main": "dist/index.js",
+  "module": "dist/index.esm.js",
+  "unpkg": "dist/index.umd.min.js",
+  "jsdelivr": "dist/index.umd.min.js",
   "files": [
     "dist"
   ],
   "scripts": {
     "lint": "eslint --ignore-path .gitignore .",
     "format": "prettier --ignore-path .gitignore --check '**/*.{css,graphql,html,json,md,scss,yml}'",
-    "dev": "rollup -cw",
-    "build": "rollup -c",
-    "prepublishOnly": "npm run lint && npm run build"
+    "dev": "bili -w",
+    "build": "bili",
+    "prepublishOnly": "npm run lint && npm run format && npm run build"
   },
   "lint-staged": {
     "*.js": [
@@ -36,12 +37,7 @@
   "author": "Rick Stevens <rick.stevens@greenhousegroup.com>",
   "license": "MIT",
   "devDependencies": {
-    "@babel/core": "^7.9.6",
-    "@babel/preset-env": "^7.9.6",
-    "@rollup/plugin-babel": "^5.0.0",
-    "@rollup/plugin-commonjs": "^11.1.0",
-    "@rollup/plugin-json": "^4.0.3",
-    "@rollup/plugin-node-resolve": "^7.1.3",
+    "bili": "^4.10.0",
     "eslint": "6.8.0",
     "eslint-config-airbnb-base": "14.1.0",
     "eslint-config-prettier": "^6.11.0",
@@ -50,13 +46,9 @@
     "husky": "^4.2.5",
     "lint-staged": "^10.2.2",
     "prettier": "^2.0.5",
-    "rollup": "^2.8.2",
-    "rollup-plugin-eslint": "^7.0.0",
-    "rollup-plugin-uglify": "^6.0.4"
+    "rollup-plugin-node-builtins": "^2.1.2"
   },
   "dependencies": {
-    "core-js": "3",
-    "isomorphic-fetch": "^2.2.1",
-    "regenerator-runtime": "^0.13.5"
+    "node-fetch": "^2.6.0"
   }
 }

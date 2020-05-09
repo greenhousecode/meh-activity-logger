@@ -1,6 +1,6 @@
 # MEH Activity Logger
 
-> Express middleware to log custom events to Google Analytics.
+> Log custom events to Google Analytics.
 
 ## Install
 
@@ -14,7 +14,7 @@ Logging an event:
 
 ```js
 // Node with Express
-import activityLogger from 'meh-activity-logger';
+import expressMiddleware as activityLogger from 'meh-activity-logger';
 import express from 'express';
 
 express()
@@ -34,7 +34,6 @@ const { event } = activityLogger('UA-XXXXXX-X');
 
 event({
   action: 'Example event',
-  clientId: '0.0.0.0',
   uip: '0.0.0.0',
   ua:
     'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.132 Safari/537.36',
@@ -48,7 +47,7 @@ event({
 <!-- Browser with JavaScript -->
 <script src="https://unpkg.com/meh-activity-logger"></script>
 <script>
-  var logger = window.mehActivityLogger({
+  var logger = window.mehActivityLogger.default({
     tid: 'UA-XXXXXX-X',
     appName: 'my-package-name',
     appVersion: 'my-package-version',
@@ -56,7 +55,7 @@ event({
 
   logger.event({
     action: 'Example event',
-    clientId: '0.0.0.0',
+    userId: '0.0.0.0',
   });
 </script>
 ```
@@ -69,7 +68,7 @@ Will all result in:
 {
   "v": 1,
   "tid": "UA-XXXXXX-X",
-  "cid": "d3486ae9-136e-5856-bc42-212385ea7970",
+  "uid": "2065339419",
   "uip": "0.0.0.0",
   "ua": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.132 Safari/537.36",
   "dr": "https://www.example.com/",
