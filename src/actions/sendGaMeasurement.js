@@ -3,14 +3,14 @@ import { REQUIRED_PROPERTIES, GOOGLE_ANALYTICS_ENDPOINTS } from '../config.json'
 
 const isDev = (hostname) => /^localhost$|^127\.0\.0\.1$|-(test|acc)\./i.test(hostname);
 
-export default async (properties = {}) => {
+export default async (type, properties = {}) => {
   // Remove empty properties
   const filteredProperties = { ...properties };
   Object.keys(filteredProperties).forEach(
     (key) => filteredProperties[key] == null && delete filteredProperties[key],
   );
 
-  const missingProperties = REQUIRED_PROPERTIES[filteredProperties.t].filter(
+  const missingProperties = REQUIRED_PROPERTIES[type].filter(
     (requiredProperty) => !Object.keys(filteredProperties).includes(requiredProperty),
   );
 
