@@ -1,5 +1,4 @@
 import fetch from 'cross-fetch';
-
 import { REQUIRED_PROPERTIES, GOOGLE_ANALYTICS_ENDPOINTS } from '../config.json';
 
 const isDev = (hostname) =>
