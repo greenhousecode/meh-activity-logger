@@ -163,7 +163,7 @@ Custom properties:
 
 ### `pageview([properties])`
 
-- Returns: `Promise`<[Response](https://www.npmjs.com/package/node-fetch#class-response)>
+- Returns: `Promise`<[Response](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch#Response_objects)>
 
 Optionally overrides global properties, and fires a pageview event to Google Analytics.
 

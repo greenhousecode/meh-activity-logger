@@ -1,8 +1,7 @@
 import fetch from 'cross-fetch';
 import { REQUIRED_PROPERTIES, GOOGLE_ANALYTICS_ENDPOINTS } from '../config.json';
 
-const isDev = (hostname) =>
-  typeof hostname === 'string' && /^localhost$|^127\.0\.0\.1$|-(test|acc)\./i.test(hostname);
+const isDev = (hostname) => /^localhost$|^127\.0\.0\.1$|-(test|acc)\./i.test(hostname);
 
 export default async (properties = {}) => {
   // Remove empty properties
