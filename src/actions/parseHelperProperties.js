@@ -37,8 +37,8 @@ export default (properties) => {
   }
 
   if (properties.appVersion) {
-    parsedProperties.av = properties.appName;
-    parsedProperties.cd2 = properties.appName;
+    parsedProperties.av = properties.appVersion;
+    parsedProperties.cd2 = properties.appVersion;
     delete parsedProperties.appVersion;
   }
 

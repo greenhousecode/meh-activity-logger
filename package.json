@@ -5,7 +5,7 @@
   "main": "dist/index.js",
   "module": "dist/index.esm.js",
   "unpkg": "dist/index.umd.min.js",
-  "jsdelivr": "dist/index.umd.min.js",
+  "browser": "dist/index.umd.min.js",
   "files": [
     "dist"
   ],
@@ -49,6 +49,6 @@
     "rollup-plugin-node-builtins": "^2.1.2"
   },
   "dependencies": {
-    "node-fetch": "^2.6.0"
+    "cross-fetch": "^3.0.4"
   }
 }
