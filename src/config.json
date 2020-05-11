@@ -1,0 +1,19 @@
+{
+  "GOOGLE_ANALYTICS_ENDPOINTS": {
+    "PRODUCTION": "https://www.google-analytics.com/collect",
+    "DEBUG": "https://www.google-analytics.com/debug/collect"
+  },
+  "REQUIRED_PROPERTIES": {
+    "event": ["v", "tid", "uid", "ec", "ea", "an", "aid", "av", "cd1", "cd2"],
+    "pageView": ["v", "tid", "uid", "an", "aid", "av", "cd1", "cd2"]
+  },
+  "DEFAULT_PROPERTIES": {
+    "v": 1,
+    "tid": "UA-26548270-15"
+  },
+  "EVENT_CATEGORY_MAPPING": {
+    "1": "Primary KPI",
+    "2": "Secondary KPI",
+    "3": "Tertiary KPI"
+  }
+}
