@@ -14,7 +14,7 @@ Event logging example in all three environments with the same outcome:
 
 ```js
 // 1. Node with Express
-import expressMiddleware as mehActivityLogger from 'meh-activity-logger';
+import { expressMiddleware as mehActivityLogger } from 'meh-activity-logger';
 import express from 'express';
 
 express()
@@ -126,7 +126,7 @@ Defaults:
 
 ### `event(eventAction|properties)`
 
-- Returns: `Promise`<[Response](https://www.npmjs.com/package/isomorphic-fetch)>
+- Returns: `Promise`<[Response](https://www.npmjs.com/package/cross-fetch)>
 
 Overrides global properties, and fires a custom event to Google Analytics.
 
