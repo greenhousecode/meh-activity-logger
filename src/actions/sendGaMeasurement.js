@@ -24,7 +24,9 @@ export default async (type, properties = {}) => {
   const body = new URLSearchParams();
 
   Object.keys(filteredProperties).forEach(
-    (key) => filteredProperties[key] != null && body.append(key, filteredProperties[key]),
+    (key) =>
+      filteredProperties[key] != null &&
+      body.append(key, encodeURIComponent(filteredProperties[key])),
   );
 
   const response = await fetch(googleAnalyticsEndpoint, { method: 'POST', body });
