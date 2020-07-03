@@ -1,6 +1,6 @@
 {
   "name": "meh-activity-logger",
-  "version": "2.0.2",
+  "version": "2.0.3",
   "description": "Log custom events and pageviews with opinionated defaults to Google Analytics through Express middleware, Node or the browser.",
   "main": "dist/index.js",
   "module": "dist/index.esm.js",
