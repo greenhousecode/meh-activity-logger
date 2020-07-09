@@ -42,5 +42,9 @@ export default (properties) => {
     delete parsedProperties.appVersion;
   }
 
+  if (!properties.ua)
+    parsedProperties.ua =
+      'Mozilla/4.0 (compatible; MSIE 6.1; Windows XP; .NET CLR 1.1.4322; .NET CLR 2.0.50727)';
+
   return parsedProperties;
 };
