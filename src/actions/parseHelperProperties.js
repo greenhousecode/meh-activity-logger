@@ -4,9 +4,9 @@ import generateHash from '../utils/generateHash';
 export default (properties) => {
   const parsedProperties = { ...properties };
 
-  if (properties.userId) {
-    parsedProperties.uid = generateHash(properties.userId);
-    delete parsedProperties.userId;
+  if (properties.clientId) {
+    parsedProperties.cid = generateHash(properties.clientId);
+    delete parsedProperties.clientId;
   }
 
   if (properties.priority) {

@@ -19,7 +19,7 @@ export default (req = {}) => {
   return {
     ...DEFAULT_PROPERTIES,
     tid: process.env.MEH_ACTIVITY_LOGGER_MEASUREMENT_ID || DEFAULT_PROPERTIES.tid,
-    userId: req.ip,
+    clientId: req.ip,
     uip: req.ip,
     ua: req.get ? req.get('User-Agent') : null,
     dr: req.get ? req.get('Referer') : null,
