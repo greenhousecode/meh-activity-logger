@@ -34,7 +34,7 @@ const { event } = mehActivityLogger('UA-XXXXXX-X');
 
 event({
   action: 'Example event',
-  userId: '0.0.0.0',
+  clientId: '0.0.0.0',
   uip: '0.0.0.0',
   ua:
     'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.132 Safari/537.36',
@@ -57,7 +57,7 @@ event({
   logger
     .event({
       action: 'Example event',
-      userId: '0.0.0.0',
+      clientId: '0.0.0.0',
       uip: '0.0.0.0',
     })
     .catch(console.error);
@@ -77,7 +77,7 @@ v=1
 &dp=%2Fexample
 &uip=0.0.0.0
 &t=event
-&uid=2065339419
+&cid=2065339419
 &ec=Primary+KPI
 &ea=Example+event
 &an=example-app
@@ -153,7 +153,7 @@ Custom properties:
 
 | Key          | Type                    | Description                                                                       | Maps to                                                                                                                                                                                                                                                                                                                                                   |
 | ------------ | ----------------------- | --------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `userId`     | String                  | A unique representation of the user/session. Its value will be hashed/anonymized. | `uid` ([User ID](https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters#uid))                                                                                                                                                                                                                                                |
+| `clientId`   | String                  | A unique representation of the user/session. Its value will be hashed/anonymized. | `cid` ([Client ID](https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters#cid))                                                                                                                                                                                                                                              |
 | `priority`   | Integer (`1`\|`2`\|`3`) | Resolves to `"Primary KPI"`, `"Secondary KPI"` or `"Tertiary KPI"` respectively.  | `ec` ([Event Category](https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters#ec))                                                                                                                                                                                                                                           |
 | `action`     | String                  | Describes the event taking place.                                                 | `ea` ([Event Action](https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters#ea))                                                                                                                                                                                                                                             |
 | `label`      | String                  | Labels the event.                                                                 | `el` ([Event Label](https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters#el))                                                                                                                                                                                                                                              |

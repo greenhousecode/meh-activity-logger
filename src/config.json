@@ -4,8 +4,8 @@
     "DEBUG": "https://www.google-analytics.com/debug/collect"
   },
   "REQUIRED_PROPERTIES": {
-    "event": ["v", "tid", "uid", "ec", "ea", "an", "aid", "av", "cd1", "cd2"],
-    "pageView": ["v", "tid", "uid", "an", "aid", "av", "cd1", "cd2"]
+    "event": ["v", "tid", "cid", "ec", "ea", "an", "aid", "av", "cd1", "cd2"],
+    "pageView": ["v", "tid", "cid", "an", "aid", "av", "cd1", "cd2"]
   },
   "DEFAULT_PROPERTIES": {
     "v": 1,
